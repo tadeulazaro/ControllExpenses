@@ -1,19 +1,21 @@
 /* Estilo global */
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(120deg, #e3fcec 50%, #fde8e8 50%);
+    font-size: clamp(14px, 1.5vw, 18px); /* Fonte ajustável entre 14px e 18px */
     margin: 0;
     padding: 0;
 }
 
 .container {
     max-width: 750px;
-    margin: 40px auto;
-    padding: 25px;
-    background: #cecece;
+    margin: 5vw auto;
+    padding: 5vw;
+    background: #ffffff;
     border-radius: 12px;
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.4s ease;
+    width: 90%;
+    max-width: 750px;
 }
 
 .container:hover {
@@ -25,6 +27,7 @@ h1 {
     color: #333333;
     margin-bottom: 15px;
     font-size: 2.8rem;
+    font-size: clamp(18px, 2.5vw, 32px); /* Ajusta títulos conforme a tela */
 }
 
 h2 {
@@ -32,6 +35,7 @@ h2 {
     color: #666666;
     font-size: 1.3rem;
     margin-bottom: 25px;
+    font-size: clamp(18px, 2.5vw, 32px); /* Ajusta títulos conforme a tela */
 }
 
 /* Resumo dos Totais */
@@ -128,16 +132,56 @@ h2 {
 
 /* Tabela */
 table {
+    
     width: 100%;
     border-collapse: collapse;
     border-radius: 12px;
     overflow: hidden;
 }
+/* Melhorando layout flexível */
+.summary,
+.form-expense {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.table-container {
+    height: calc(1.2em * 30); /* Altura para 20 linhas */
+    overflow-y: auto; /* Habilita o scroll vertical */
+    border: 1px solid #24d0ff; /* Borda mais sutil */
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 10px; /* Espaçamento interno */
+    line-height: 1.5em; /* Altura de cada linha, mais espaçada */
+
+    max-height: 50vh; /* Ajuste melhor para telas pequenas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  }
+  
+  /* Estilo personalizado para a barra de rolagem */
+  .table-container::-webkit-scrollbar {
+    width: 8px; /* Largura da barra de rolagem */
+  }
+  
+  .table-container::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Fundo do track */
+    border-radius: 8px; /* Arredondamento */
+  }
+  
+  .table-container::-webkit-scrollbar-thumb {
+    background: #24d0ff; /* Cor da barra de rolagem */
+    border-radius: 8px; /* Arredondamento */
+  }
+  
+  .table-container::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Cor da barra ao passar o mouse */
+  }
+  
 
 table th,
 table td {
     border: 1px solid #ddd;
-    padding: 12px;
+    padding: 2px;
     text-align: center;
 }
 
@@ -207,3 +251,225 @@ table td:hover {
     background-color: #ffebee; /* Vermelho claro */
     color: #b71c1c; /* Vermelho escuro */
 }
+/* Container da pesquisa */
+.search-container {
+    position: relative;
+    width: 100%;
+    transition: width 0.3s ease-in-out;
+}
+
+/* Estilo do campo de pesquisa */
+#searchInput {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 25px;
+    border: 1px solid #100a69;
+    outline: none;
+    box-sizing: border-box;
+    transition: width 0.3s ease-in-out;
+}
+
+
+
+/* Estilo global */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f4f7fa;
+}
+
+/* Container principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Título */
+h1.display-4 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+/* Subtítulo */
+.lead {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-bottom: 40px;
+}
+
+/* Seção de Benefícios */
+.row h3 {
+    font-size: 1.6rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.row p {
+    font-size: 1rem;
+    color: #34495e;
+}
+
+/* Estilos para os botões */
+.btn {
+    font-size: 1.2rem;
+    padding: 5px 15px;
+    border-radius: 30px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-5px);
+}
+
+.btn-success {
+    background-color: #27ae60;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #2ecc71;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+
+/* Icones nos botões */
+.btn i {
+    margin-right: 10px;
+}
+
+/* Section Benefits - Improve visual appeal */
+.row {
+    margin-bottom: 50px;
+}
+
+.col-md-4 {
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.col-md-4:hover {
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Espaçamento entre seções */
+.mt-5 {
+    margin-top: 50px;
+}
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: red;
+    transition: .4s;
+    border-radius: 20px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: green;
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+
+
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #24d0ff; /* Cor padrão do site */
+    color: #fff;
+    border-bottom: 2px solid #555;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.user-info span {
+    background-color: #cacaca; /* Fundo sutil para destaque */
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: clamp(14px, 1.5vw, 18px); /* Nome do usuário responsivo */
+}
+
+.user-info i {
+    font-size: 35px;
+    color: #ffee00; /* Cor de destaque para o ícone */
+}
+
+.btn-logout {
+    background-color: #555; /* Vermelho elegante */
+    color: white;
+    padding: 5px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s ease;
+    font-size: clamp(12px, 1vw, 16px); /* Botão "Sair" também ajustável */
+    padding: clamp(5px, 0.8vw, 10px) clamp(10px, 1.2vw, 15px);
+}
+
+.btn-logout:hover {
+    background-color: #c9302c; /* Tom mais escuro no hover */
+    transform: scale(1.05);
+}
+
+
+
+
+
+p {
+    font-size: clamp(12px, 1.2vw, 16px); /* Ajuste automático no parágrafo */
+}
+

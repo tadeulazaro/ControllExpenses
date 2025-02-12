@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organograma - Sistema de Controle de Despesas</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .box {
+            background: #45a049;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .box h3 {
+            margin: 0 0 15px;
+            font-size: 1.4em;
+        }
+
+        .sub-box {
+            background: #36993d;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Organograma - Sistema de Controle de Despesas</h1>
+    <div class="container">
+        <div class="box">
+            <h3>Login e Autenticação</h3>
+            <div class="sub-box">Cadastro de usuário</div>
+            <div class="sub-box">Login (sessão 15 min)</div>
+            <div class="sub-box">Usuário logado na interface</div>
+            <div class="sub-box">Recuperação de senha</div>
+        </div>
+
+        <div class="box">
+            <h3>Dashboard</h3>
+            <div class="sub-box">Resumo financeiro</div>
+            <div class="sub-box">Gráfico geral</div>
+            <div class="sub-box">Acesso rápido</div>
+        </div>
+
+        <div class="box">
+            <h3>Gestão de Despesas</h3>
+            <div class="sub-box">Adicionar despesa</div>
+            <div class="sub-box">Gerenciar categorias</div>
+            <div class="sub-box">Pesquisar despesas</div>
+            <div class="sub-box">Visualizar gráfico</div>
+        </div>
+
+        <div class="box">
+            <h3>Resumo Financeiro</h3>
+            <div class="sub-box">Entradas Totais</div>
+            <div class="sub-box">Saídas Totais</div>
+            <div class="sub-box">Saldo Total</div>
+            <div class="sub-box">A vencer / Vencidas</div>
+        </div>
+
+        <div class="box">
+            <h3>Funcionalidades Futuras</h3>
+            <div class="sub-box">Exportação de relatórios</div>
+            <div class="sub-box">Definição de metas</div>
+            <div class="sub-box">Notificações via e-mail</div>
+            <div class="sub-box">Controle de assinaturas</div>
+        </div>
+    </div>
+</body>
+</html>

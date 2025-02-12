@@ -1,5 +1,8 @@
+
 {% extends "base.html" %}
+
 {% block content %}
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -8,6 +11,23 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+
+<nav>
+    <!-- Aqui vamos verificar se o usuário está logado -->
+    {% if nome_completo %}
+    <div class="user-info">
+        <span>Bem-vindo, {{ nome_completo }}!</span>
+        <i class="fas fa-user-circle"></i> <!-- Ícone de usuário -->
+        <a href="{{ url_for('logout') }}" class="btn-logout">Sair</a>
+    </div>
+    {% else %}
+    <a href="{{ url_for('login') }}">Login</a>
+    {% endif %}
+</nav>
+
 
 <br><br>
 <div class="summary">
@@ -30,17 +50,49 @@
         {% endif %}
         R$ {{ saldo }}
     </div>
-    
+    <div id="a-vencer" class="total-a-vencer">
+        A vencer: <i class="bi bi-exclamation-circle text-warning"></i> 
+        R$ {{ total_a_vencer }}
+    </div>
+    <div id="vencidas" class="total-vencidas">
+        Vencidas: <i class="bi bi-x-circle text-danger"></i> 
+        R$ {{ total_vencidas }}
+    </div>
 </div>
+
 
 
 <!-- Botão para abrir o modal de adicionar despesa -->
-<div class="button-container">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addExpenseModal">
-        <i class="bi bi-plus-lg"></i> 
+<div class="button-container d-flex justify-content-start gap-2">
+    <!-- Botão para adicionar despesa -->
+    <button title="Clique para adicionar uma nova Despesa" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addExpenseModal">
+        <i class="bi bi-plus-lg"></i>
     </button>
+
+    <!-- Botão para adicionar categoria -->
+    <button title="Clique para adicionar uma nova categoria" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+        <i class="bi bi-tags-fill"></i> <!-- Ícone de categoria -->
+    </button>
+    <!-- Botão para excluir categoria -->
+<button title="Clique para excluir uma categoria" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal">
+    <i class="bi bi-tags-fill"></i> <!-- Ícone de categoria -->
+</button>
+
+    <button class="btn btn-outline-secondary" type="button" id="searchBtn">
+        <i class="bi bi-search"></i>
+
+    
+
 </div>
 
+<br>
+<!-- Barra de pesquisa e Botão de pesquisa -->
+<div class="d-flex align-items-center gap-2">
+    <div class="search-container">
+        <input type="text" id="searchInput" class="form-control" placeholder="Pesquisar despesas ou categorias..." style="display: none;">
+    </div>
+
+</div>
 <br><br>
 
 <div class="table-container">
@@ -52,11 +104,13 @@
                 <th>Categoria</th>
                 <th>Valor</th>
                 <th>Data</th>
+                <th>Vencimento</th>
                 <th>Tipo</th>
+                <th>Pago</th> <!-- Nova coluna -->
                 <th>Ações</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="expenseTable">
             {% for expense in expenses %}
             <tr class="{{ 'table-entry' if expense.type == 'entrada' else 'table-expense' }}">
                 <td>
@@ -67,32 +121,41 @@
                     {% endif %}
                 </td>
                 <td>{{ expense.description }}</td>
-                <td>{{ expense.category }}</td>
-                <td>R$ {{ expense.value }}</td>
+               <td>{{ expense.category_name }}</td>
+               <td>{{ expense.value | float }}</td>
+
+                <td>{{ expense.date.strftime('%d/%m/%Y') }}</td>
                 <td>{{ expense.date.strftime('%d/%m/%Y') }}</td>
                 <td>{{ expense.type }}</td>
                 <td>
-                    <a href="{{ url_for('edit_expense', expense_id=expense.id) }}" class="btn btn-warning" title="Editar">
+                    <label class="switch">
+                        <input type="checkbox" class="toggle-paid" data-expense-id="{{ expense._id }}" 
+                            {% if expense.paid %} checked {% endif %}>
+                        <span class="slider"></span>
+                    </label>
+                </td>
+                <td>
+                    <a href="{{ url_for('edit_expense', expense_id=expense._id) }}" class="btn btn-warning" title="Editar">
                         <i class="bi bi-pencil"></i>
                     </a>
-                    <a href="{{ url_for('delete_expense', expense_id=expense.id) }}" class="btn btn-danger" title="Excluir" onclick="return confirm('Tem certeza que deseja excluir?')">
+                    
+                    <a href="{{ url_for('delete_expense', expense_id=expense._id) }}" class="btn btn-danger" title="Excluir" onclick="return confirm('Tem certeza que deseja excluir?')">
                         <i class="bi bi-x"></i>
                     </a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
+        
     </table>
 </div>
+
 <br><br>
-
-
-<div class="chart-wrapper" style="background-color: white; padding: 20px; border-radius: 10px;">
-    <div class="chart-container" style="width: 50%; margin: 0 auto;">
-        <canvas id="categoryChart" width="300" height="300"></canvas>
+<div class="chart-wrapper p-4 bg-white shadow-lg rounded-4 d-flex justify-content-center" style="border: 1px solid #007bff;">
+    <div class="chart-container w-100" style="max-width: 500px;">
+        <canvas id="categoryChart"></canvas>
     </div>
 </div>
-
 
 <script>
     var ctx = document.getElementById('categoryChart').getContext('2d');
@@ -136,43 +199,194 @@
             }
         }
     });
+
+    // Mostrar o campo de pesquisa ao clicar no botão
+    document.getElementById('searchBtn').addEventListener('click', function() {
+        var searchInput = document.getElementById('searchInput');
+        searchInput.style.display = searchInput.style.display === 'none' ? 'block' : 'none';
+    });
+
+    // Função de busca
+    document.getElementById('searchInput').addEventListener('keyup', function(event) {
+        var searchTerm = event.target.value.toLowerCase();
+        var rows = document.querySelectorAll('#expenseTable tr');
+
+        rows.forEach(function(row) {
+            var description = row.cells[1].textContent.toLowerCase();
+            var category = row.cells[2].textContent.toLowerCase();
+            if (description.includes(searchTerm) || category.includes(searchTerm)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+
+    document.querySelectorAll('.toggle-paid').forEach(checkbox => {
+    checkbox.addEventListener('change', function () {
+        const expenseId = this.getAttribute('data-expense-id');
+        const paidStatus = this.checked;
+
+        fetch(`/update_paid_status/${expenseId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ paid: paidStatus }) // Envia o estado booleano diretamente
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.success) {
+                alert('Erro ao atualizar o status: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao se conectar com o servidor.');
+        });
+    });
+});
+
+
+$(document).ready(function() {
+    $('#add-expense-form').submit(function(e) {
+        e.preventDefault(); // Impede o envio tradicional do formulário
+
+        // Coleta os dados do formulário
+        var formData = {
+            description: $('#description').val(),
+            category: $('#category').val(),
+            value: $('#value').val(),
+            date: $('#date').val(),
+            type: $('#type').val(),
+            installments: $('#installments').val() // Adiciona o número de parcelas
+        };
+
+        // Verifica se o número de parcelas é válido
+        if (formData.installments < 1 || isNaN(formData.installments)) {
+            alert('Por favor, insira um número válido de parcelas.');
+            return;
+        }
+
+        // Calcula as datas de vencimento
+        var startDate = new Date(formData.date);
+        var installmentDates = [];
+
+        for (var i = 0; i < formData.installments; i++) {
+            var nextDate = new Date(startDate);
+            nextDate.setMonth(nextDate.getMonth() + i); // Adiciona i meses ao vencimento inicial
+            installmentDates.push(nextDate.toLocaleDateString("pt-BR")); // Formata a data para o padrão brasileiro
+        }
+
+        // Adiciona as datas de vencimento ao formData
+        formData.installmentDates = installmentDates;
+
+        // Envia os dados via AJAX
+        $.ajax({
+            type: 'POST',
+            url: '/add',  // Ajuste aqui se a rota mudou
+            data: formData,
+            success: function(response) {
+                $('#addExpenseModal').modal('hide'); // Fecha o modal
+                alert('Despesa e parcelas adicionadas com sucesso!');
+                location.reload(); // Recarrega a página para atualizar a lista
+            },
+            error: function(error) {
+                alert('Erro ao adicionar despesa: ' + error.responseText);
+            }
+        });
+    });
+});
+
+
+
+
+    
 </script>
 
-<!-- Modal para adicionar nova despesa -->
-<div class="modal fade" id="addExpenseModal" tabindex="-1" role="dialog" aria-labelledby="addExpenseModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addExpenseModalLabel">Adicionar Nova Despesa</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+
+
+
+
+<!-- Modal para adicionar despesa -->
+<div class="modal fade" id="addExpenseModal" tabindex="-1" aria-labelledby="addExpenseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered"> <!-- Modal centralizado na tela -->
+        <div class="modal-content shadow-lg rounded-4 border-0"> <!-- Bordas arredondadas e sombra -->
+            <div class="modal-header bg-primary text-white rounded-top-4">
+                <h5 class="modal-title" id="addExpenseModalLabel">Adicionar Despesa</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <form action="/add" method="POST" class="form-expense">
-                    <input type="text" name="description" placeholder="Descrição" required>
-                    <div class="category-container">
-                        <select name="category" required>
-                            <option value="">Selecione uma categoria</option>
+            <div class="modal-body p-4">
+                <form id="add-expense-form" method="POST">
+                    <div class="mb-3">
+                        <label for="description" class="form-label fw-semibold">Descrição</label>
+                        <input type="text" class="form-control rounded-3" id="description" name="description" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label fw-semibold">Categoria</label>
+                        <select class="form-select rounded-3" id="category" name="category" required>
+                            <option value="" disabled selected>Selecione uma categoria</option>
                             {% for category in categories %}
-                            <option value="{{ category.name }}">{{ category.name }}</option>
+                                <option value="{{ category['_id'] }}">{{ category['name'] }}</option>
                             {% endfor %}
                         </select>
-                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
-                            Nova Categoria
-                        </button>
                     </div>
-                    <input type="number" step="0.01" name="value" placeholder="Valor" required>
-                    <input type="date" name="date" required>
-                    <select name="type" required>
-                        <option value="">Selecione o tipo</option>
-                        <option value="entrada">Entrada</option>
-                        <option value="saida">Saída</option>
-                    </select>
-                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                    <div class="mb-3">
+                        <label for="value" class="form-label fw-semibold">Valor</label>
+                        <input type="number" step="0.01" class="form-control rounded-3" id="value" name="value" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="date" class="form-label fw-semibold">Data de Vencimento Inicial</label>
+                        <input type="date" class="form-control rounded-3" id="date" name="date" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="installments" class="form-label fw-semibold">Número de Parcelas</label>
+                        <input type="number" class="form-control rounded-3" id="installments" name="installments" min="1" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="type" class="form-label fw-semibold">Tipo</label>
+                        <select class="form-select rounded-3" id="type" name="type" required>
+                            <option value="entrada">Entrada</option>
+                            <option value="saida">Saída</option>
+                        </select>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary rounded-3 fw-bold py-2">Adicionar</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+
+
+<!-- Modal para adicionar nova categoria -->
+<div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCategoryModalLabel">Adicionar Nova Categoria</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/add_category" method="POST">
+                    <input type="text" name="category_name" id="category_name" placeholder="Nome da categoria" required>
+                    <button type="submit" class="btn btn-primary">Adicionar Categoria</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
 {% endblock %}

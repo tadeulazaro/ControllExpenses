@@ -1,0 +1,16 @@
+scfx xbqp qfjc gwxb
+
+
+
+
+entando buscar a despesa com ID: 67a8a2b0a1d336fefb272e45
+Despesa encontrada: 
+{'_id': ObjectId('67a8a2b0a1d336fefb272e45'), 
+'description': 'Mercado', 
+'category': 'casa',
+ 'value': 850.0, 
+ 'date': datetime.datetime(2025, 2, 11, 0, 0), 
+ 'type': 'saida', 
+ 'status': 'NOK', 
+ 'paid': True,
+  'usuario_id': ObjectId('67a401922b5e20ce70a67cf0')}

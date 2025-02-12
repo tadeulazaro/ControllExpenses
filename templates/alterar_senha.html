@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Senha</title>
+</head>
+<body>
+    <h2>Alterar Senha</h2>
+    <form method="POST">
+        <label for="nova_senha">Nova Senha:</label>
+        <input type="password" id="nova_senha" name="nova_senha" placeholder="Nova Senha" required><br>
+
+        <label for="confirmar_senha">Confirmar Senha:</label>
+        <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Confirme a Senha" required><br>
+
+        <button type="submit">Alterar Senha</button>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div>{{ messages[0] }}</div>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

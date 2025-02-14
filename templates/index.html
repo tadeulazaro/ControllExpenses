@@ -61,7 +61,6 @@
 </div>
 
 
-
 <!-- Botão para abrir o modal de adicionar despesa -->
 <div class="button-container d-flex justify-content-start gap-2">
     <!-- Botão para adicionar despesa -->
@@ -73,17 +72,23 @@
     <button title="Clique para adicionar uma nova categoria" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
         <i class="bi bi-tags-fill"></i> <!-- Ícone de categoria -->
     </button>
-    <!-- Botão para excluir categoria -->
-<button title="Clique para excluir uma categoria" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal">
-    <i class="bi bi-tags-fill"></i> <!-- Ícone de categoria -->
-</button>
 
+    <!-- Botão para excluir categoria -->
+    <button title="Clique para excluir uma categoria" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal">
+        <i class="bi bi-tags-fill"></i> <!-- Ícone de categoria -->
+    </button>
+
+    <!-- Botão de busca -->
     <button class="btn btn-outline-secondary" type="button" id="searchBtn">
         <i class="bi bi-search"></i>
+    </button>
 
-    
-
+    <!-- Botão para exclusão massiva -->
+    <button title="Clique para excluir despesa em massa" type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#massDeleteModal">
+        <i class="bi bi-trash"></i> <!-- Ícone de exclusão massiva -->
+    </button>
 </div>
+
 
 <br>
 <!-- Barra de pesquisa e Botão de pesquisa -->
@@ -120,6 +125,7 @@
                     <i class="bi bi-arrow-down-circle text-danger" title="Saída"></i>
                     {% endif %}
                 </td>
+                
                 <td>{{ expense.description }}</td>
                <td>{{ expense.category_name }}</td>
                <td>{{ expense.value | float }}</td>

@@ -7,31 +7,19 @@ from dotenv import load_dotenv
 
 from email.mime.text import MIMEText
 
-from flask import Flask, jsonify,render_template, request, redirect, url_for, flash, session
+from flask import Flask, jsonify, render_template, request, redirect, url_for, flash, session
 from flask_pymongo import PyMongo
-from flask_login import login_required, current_user,LoginManager,UserMixin
+from flask_login import login_required, current_user, LoginManager, UserMixin
 from flask_mail import Mail, Message
 
+from itsdangerous import URLSafeTimedSerializer, BadSignature, SignatureExpired
 
-from itsdangerous import URLSafeTimedSerializer,BadSignature, SignatureExpired
-
-from pymongo import MongoClient
-
-from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler
 from werkzeug.security import generate_password_hash, check_password_hash
 
-
 import os
-import re,smtplib
-
+import re, smtplib
 
 import requests
-
-
-serializer = URLSafeTimedSerializer("chave_secreta_super_segura")
-
-
 
 # Carregar as variáveis do arquivo .env
 load_dotenv()
@@ -47,12 +35,12 @@ app.config['DEBUG'] = True  # Ativa o modo de depuração
 app.config['MONGO_URI'] = os.getenv("MONGO_URI")  # Conexão com o MongoDB via string de conexão
 app.secret_key = SECRET_KEY  # Configurar o segredo usando a variável do .env
 
-# Instância do PyMongo
+# Instância do PyMongo (conexão com o MongoDB)
 mongo = PyMongo(app)
-db = mongo.db  
+db = mongo.db  # Isso já dá acesso ao banco de dados através do PyMongo
 
 # Configuração do Flask-Mail com variáveis de ambiente
-app.config['MAIL_SERVER'] = 'smtp.gmail.com' 
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')  # Carregar de .env
@@ -68,20 +56,7 @@ mail = Mail(app)
 # Criando um serializador para gerar tokens seguros
 s = URLSafeTimedSerializer(app.secret_key)
 
-
-
-
-# Configuração do serializador de tokens
-SECRET_KEY = os.urandom(24)  # Melhor salvar uma chave fixa no ambiente de produção
-serializer = URLSafeTimedSerializer(SECRET_KEY)
-
-client = MongoClient(os.getenv("MONGO_URI"))  # Inicializa a conexão
-db = client.get_database()
-
-
-
-
-# Crie uma instância do LoginManager
+# Criação do LoginManager
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -90,14 +65,13 @@ login_manager.login_view = 'login'
 
 # Modelos adaptados para o MongoDB
 def get_expense_collection():
-    return mongo.db.despesas
+    return mongo.db.despesas  # Retorna a coleção 'despesas' no MongoDB
 
 def get_category_collection():
-    return mongo.db.categories
+    return mongo.db.categories  # Retorna a coleção 'categories'
 
 def get_usuarios_collection():
-  return mongo.db.usuarios
-
+    return mongo.db.usuarios  # Retorna a coleção 'usuarios'
 
 
 @app.before_request

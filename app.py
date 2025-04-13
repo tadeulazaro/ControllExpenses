@@ -789,7 +789,7 @@ def allowed_file(filename):
 
 # Configurações AWS
 s3 = boto3.client('s3', region_name='us-east-1')  # ajuste a região
-BUCKET_NAME = 'fotos-usuarios-meusite'
+BUCKET_NAME = 'uploadimagelogin'
 
 @app.route('/upload', methods=['POST'])
 def upload_file():

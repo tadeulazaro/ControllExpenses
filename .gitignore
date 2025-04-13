@@ -1,0 +1,22 @@
+# .gitignore
+
+# Databases
+*.db
+*.sql
+
+# Cache
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+package-lock.json
+
+# Arquivos temporários e backups
+*.bak
+backup.sql
+vercel.json
+
+# Testes locais
+appteste.py
+teste.*

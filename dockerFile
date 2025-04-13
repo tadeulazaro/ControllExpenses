@@ -1,0 +1,14 @@
+# Usando imagem base do Python
+FROM python:3.9-slim
+
+# Definindo diretório de trabalho
+WORKDIR /app
+
+# Copiando arquivos para o contêiner
+COPY . /app
+
+# Instalando dependências
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Comando para rodar a aplicação
+CMD ["gunicorn", "app:app"]

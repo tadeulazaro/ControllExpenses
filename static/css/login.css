@@ -1,0 +1,161 @@
+/* Reset global */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+    background-color: #f4f7fc;
+}
+
+/* Caixa de login */
+.login-container {
+    background: white;
+    padding: 30px;
+    border: 2px solid #24d0ff;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    animation: fadeIn 0.8s ease-in-out;
+    margin: auto;
+}
+
+/* Título do formulário */
+h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Estilo dos campos de formulário */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    font-weight: 600;
+    display: block;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: 0.3s;
+    background-color: #f9f9f9;
+}
+
+input:focus {
+    border-color: #24d0ff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(251, 255, 18, 0.904);
+    background-color: #fff;
+}
+
+/* Estilo do botão */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #24d0ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background: #1e3c72;
+}
+
+/* Texto do parágrafo e link */
+p {
+    margin-top: 15px;
+    color: #666;
+}
+
+a {
+    color: #24d0ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo para a caixa de alerta */
+.alert i {
+    font-size: 30px;  /* Aumenta o tamanho do ícone */
+    margin-right: 15px; /* Dá um espaço maior entre o ícone e o texto */
+    color: #d9534f; /* Cor vermelha para ícones de erro */
+}
+
+
+/* Estilo do ícone de alerta */
+.alert img {
+    margin-right: 10px;
+    width: 24px;
+}
+
+/* Alerta de erro */
+.alert.error {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+/* Alerta de sucesso */
+.alert.success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+/* Alerta informativo */
+.alert-info {
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+    color: #0c5460;
+}
+
+/* Animação de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.custom-blue {
+    background-color: #24d0ff; /* Azul Bootstrap */
+    color: white; /* Texto branco */
+    border: none;
+}
+
+.custom-blue:hover {
+    background-color: #24d0ff; /* Azul mais escuro no hover */
+}

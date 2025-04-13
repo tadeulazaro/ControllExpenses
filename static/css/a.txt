@@ -1,0 +1,40 @@
+Você já criou pipelines no Azure DevOps? Que tipo de tarefas você automatizou?
+ já criei pipelines no Azure. com  YAML quanto no modelo clássico.
+  Implementei pipelines para gerenciar configurações de infraestrutura usando Ansible e Azure.
+
+Como avalia seu conhecimento com Terraform?
+estudei terra form, mas na empresa nao atuei, mas tenho conhecimento. ja criei alguns projetos pessoais
+
+Qual a sua experiência com Docker? Você já criou imagens personalizadas?
+sim.
+
+já criei e utilizei containers para  aplicações, incluindo a criação de imagens personalizadas. Trabalhei com Dockerfiles para personalizar ambientes, configurar dependências e otimizar imagens para produção. 
+
+Você tem experiência em desenvolver aplicações web em Node.js? Ou outra stack de programação
+Sim, automatizava processos financeiro(squad que eu liderava), criava swagger quanto geracao rapida de relatorios/
+e tambem desenvolvi apis pessoais.
+
+Você já trabalhou em uma arquitetura de micro-serviços? 
+
+sim, no grupo casas bahia, os micro servicos eram separados exmeplo catalago, frete, pedidos, financeiro e atendimento
+os mesmos se comunicavam via api rest,
+
+Sobre essas ferramentas:
+Você já utilizou Backstage para gerenciar serviços? 
+não trabalhei diretamente com o Backstage, mas sei que 
+é uma plataforma para gerenciar serviços em arquiteturas de microserviços, 
+
+
+Você tem experiência em usar Crossplane?
+nao tenho experiencia, mas conheco
+
+Você já configurou o ArgoCD para implementação contínua?
+Ja utilizei para um deploy junto co kubernetes
+Qual é a sua experiência com Helm?
+utilizei helo com argocd, mas o nivel de conhecimento dos dois e de pratica
+
+
+Como está sue inglês? e seu espanhol?
+
+ingles intermediario,(consigo ler, e um pouco conversar)
+espanhol basico

@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    /* Estilos Gerais */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+        color: #333;
+    }
+
+    h2, h3 {
+        color: #2c3e50;
+    }
+
+    p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #555;
+    }
+
+    a {
+        text-decoration: none;
+        color: #fff;
+        background-color: #3498db;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    a:hover {
+        background-color: #2980b9;
+    }
+
+    /* Seção de Introdução */
+    #intro {
+        text-align: center;
+        padding: 50px 20px;
+        background-color: #3498db;
+        color: white;
+    }
+
+    #intro h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    #intro p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    /* Seção de Chamada para Ação */
+    #call-to-action {
+        background-color: #ecf0f1;
+        padding: 50px 20px;
+        text-align: center;
+    }
+
+    #call-to-action h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .feature-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+
+    .feature-item {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-item h3 {
+        margin-top: 10px;
+        font-size: 1.4rem;
+    }
+
+    .feature-item p {
+        font-size: 1rem;
+        color: #7f8c8d;
+    }
+
+    .feature-item span {
+        font-size: 2rem;
+    }
+
+    /* Botão */
+    .button {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #3498db;
+        color: white;
+        font-size: 1.2rem;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 30px;
+    }
+
+    .button:hover {
+        background-color: #2980b9;
+    }
+
+    /* Funcionalidades */
+    .features {
+        padding: 50px 20px;
+        background-color: #fff;
+        text-align: center;
+    }
+
+    .features h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .features .feature-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 20px;
+    }
+
+    /* Rodapé */
+    footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #2c3e50;
+        color: white;
+    }
+
+    footer p {
+        font-size: 0.9rem;
+    }
+</style>
+
+    <section id="call-to-action">
+        <h2>Por Que Escolher o Control Expenses?</h2>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <span>💡</span>
+                <h3>Interface Amigável</h3>
+                <p>Interface amigável e intuitiva, feita para você.</p>
+            </div>
+            <div class="feature-item">
+                <span>📂</span>
+                <h3>Organização por Categorias</h3>
+                <p>Organize suas despesas por categorias facilmente.</p>
+            </div>
+            <div class="feature-item">
+                <span>📊</span>
+                <h3>Gráficos Detalhados</h3>
+                <p>Gráficos e relatórios detalhados para análise.</p>
+            </div>
+            <div class="feature-item">
+                <span>🔒</span>
+                <h3>Segurança Completa</h3>
+                <p>100% gratuito e seguro!</p>
+            </div>
+        </div>
+        <p>Não perca tempo! Comece hoje mesmo a transformar a maneira como você administra seu dinheiro. Junte-se a milhares de pessoas que já descobriram o segredo para uma vida financeira mais organizada e tranquila.</p>
+
+        <!-- Botões de ação -->
+        <a href="{{ url_for('cadastro') }}" class="button">Cadastre-se Agora</a>
+        <a href="{{ url_for('login') }}" class="button" style="background-color: #2ecc71;">Entrar</a>  <!-- Botão de Entrar -->
+    </section>
+
+    <section class="features">
+        <h2>Funcionalidades</h2>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <span>📊</span>
+                <h3>Gráficos Interativos</h3>
+                <p>Visualize suas finanças com gráficos modernos e interativos.</p>
+            </div>
+            <div class="feature-item">
+                <span>💼</span>
+                <h3>Gestão de Categorias</h3>
+                <p>Gerencie suas despesas por diferentes categorias.</p>
+            </div>
+            <div class="feature-item">
+                <span>💳</span>
+                <h3>Controle de Cartões</h3>
+                <p>Acompanhe suas despesas por cartão de crédito.</p>
+            </div>
+        </div>
+    </section>
+{% endblock %}

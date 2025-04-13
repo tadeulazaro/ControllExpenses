@@ -1,0 +1,70 @@
+Organograma do Sistema de Controle de Despesas
+Login e Autenticação (futuro desenvolvimento)
+
+Cadastro de usuário
+Login com senha
+Recuperação de senha
+Logout
+Dashboard (Tela Inicial)
+
+Resumo financeiro (Entradas, Saídas, Saldo)
+Gráfico geral de despesas e receitas
+Botões de acesso rápido às principais funcionalidades
+Gestão de Despesas
+
+Adicionar despesa
+Descrição
+Categoria
+Valor
+Data de vencimento
+Gerenciar categorias
+Criar nova categoria
+Editar categoria existente
+Excluir categoria
+Pesquisar despesas
+Filtros (por categoria, data, valor)
+Visualizar gráfico de despesas
+Comparação por período (mensal/anual)
+Divisão por categorias
+Resumo Financeiro
+
+Entradas Totais
+Gráfico de receitas por período
+Lista de todas as entradas registradas
+Saídas Totais
+Gráfico de despesas por período
+Lista de todas as despesas registradas
+Saldo Total
+Cálculo de entradas menos saídas
+Projeção de saldo futuro
+A vencer / Vencidas
+Lista de despesas a vencer
+Notificação de contas vencidas
+Funcionalidades Futuras
+
+Exportação de relatórios (PDF, Excel)
+Definição de metas financeiras
+Notificações de vencimento via e-mail ou WhatsApp
+Controle de assinaturas recorrentes
+Dashboard personalizável (widgets)
+Backup automático dos dados na nuvem
+Sugestão de Fases de Desenvolvimento
+Fase 1 – Login e Autenticação
+
+Criar tela de login e cadastro de usuários
+Implementar autenticação com Flask-Login
+Tela de recuperação de senha
+Fase 2 – Melhorias na Tela de Despesas
+
+Filtros avançados para pesquisa de despesas
+Opção de editar/excluir uma despesa
+Implementar ordenação por data
+Fase 3 – Gráficos e Relatórios
+
+Criar gráficos dinâmicos com filtros personalizados
+Exportação de relatórios financeiros
+Fase 4 – Funcionalidades Avançadas
+
+Implementação de notificações
+Definição de metas financeiras
+Integração com API de bancos

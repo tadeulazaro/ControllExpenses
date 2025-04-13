@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página não encontrada</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            color: #333;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #d9534f;
+        }
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+        .error-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #5cb85c;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #4cae4c;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #5cb85c;
+        }
+        .emoji {
+            font-size: 2rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="logo">👋 Olá, eu sou a <b>I AM Control Expenses</b>!</div>
+        <h1>404 - Página não encontrada 😕</h1>
+        <p>Não se preocupe! 🌟 Vou te ajudar a voltar ao caminho certo. <br> Retorne para a página inicial e tente novamente. Tudo vai dar certo! 😊</p>
+        <div class="emoji">🌈✨💻</div>
+        <a href="{{ url_for('index') }}" class="btn">Ir para a Página Inicial</a>
+    </div>
+</body>
+</html>

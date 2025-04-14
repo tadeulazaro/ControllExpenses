@@ -805,20 +805,23 @@ def upload_file():
         extension = file.filename.rsplit('.', 1)[1].lower()
         filename = f"{uuid.uuid4()}.{extension}"
 
-        # Envia pro S3
-        s3.upload_fileobj(
-            file,
-            BUCKET_NAME,
-            filename,
-            ExtraArgs={'ACL': 'public-read', 'ContentType': file.content_type}
-        )
+        try:
+            # Envia pro S3
+            s3.upload_fileobj(
+                file,
+                BUCKET_NAME,
+                filename,
+                ExtraArgs={'ACL': 'public-read', 'ContentType': file.content_type}
+            )
+            # Monta URL pública
+            file_url = f"https://{BUCKET_NAME}.s3.amazonaws.com/{filename}"
+            return jsonify({'url': file_url})
 
-        # Monta URL pública
-        file_url = f"https://{BUCKET_NAME}.s3.amazonaws.com/{filename}"
-
-        return jsonify({'url': file_url})
+        except Exception as e:
+            return jsonify({'error': f"Erro no upload: {str(e)}"}), 500
 
     return jsonify({'error': 'Formato não permitido'}), 400
+
 
 
 if __name__ == '__main__':

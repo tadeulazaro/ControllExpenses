@@ -811,7 +811,7 @@ def upload_file():
                 file,
                 BUCKET_NAME,
                 filename,
-                ExtraArgs={'ACL': 'public-read', 'ContentType': file.content_type}
+             
             )
             # Monta URL pública
             file_url = f"https://{BUCKET_NAME}.s3.amazonaws.com/{filename}"

@@ -787,9 +787,11 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
 
 
+
 # Configurações AWS
 s3 = boto3.client('s3', region_name='us-east-1')  # ajuste a região
 BUCKET_NAME = 'uploadimagelogin'
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
@@ -810,16 +812,16 @@ def upload_file():
                 file,
                 BUCKET_NAME,
                 filename,
+             
             )
-            # Monta URL pública com cache busting
-            file_url = f"https://{BUCKET_NAME}.s3.amazonaws.com/{filename}?{int(time.time())}"
+            # Monta URL pública
+            file_url = f"https://{BUCKET_NAME}.s3.amazonaws.com/{filename}"
             return jsonify({'url': file_url})
 
         except Exception as e:
             return jsonify({'error': f"Erro no upload: {str(e)}"}), 500
 
     return jsonify({'error': 'Formato não permitido'}), 400
-
 if __name__ == '__main__':
     app.run(debug=True)
 
